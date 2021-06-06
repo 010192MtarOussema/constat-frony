@@ -3,6 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 import { DynamicScriptLoaderService } from './../../services/dynamic-script-loader.service';
+import { Utilisateur, UtilisateurService } from '../services/utilisateur.service';
 
 declare const $: any;
 declare const M: any;
@@ -23,13 +24,14 @@ export class AdvanceTableComponent implements OnInit {
   imgPath: string = "";
   selectedRowData: selectRowInterface;
   newUserImg = "assets/images/user/user1.jpg";
+   listUstilisateurs : any ; 
 
 
   columns = [
-    { name: 'First Name' }, { name: 'Last Name' }, { name: 'Gender' }, { name: 'Phone' }, { name: 'Email' }, { name: 'Address' }
+    { name: 'Name' }, { name: 'Last Name' }, { name: 'Gender' }, { name: 'Phone' }, { name: 'Email' }, { name: 'Address' }
   ];
 
-  allColumns = [{ name: 'First Name' }, { name: 'Last Name' }, { name: 'Gender' }, { name: 'Phone' }, { name: 'Email' }, { name: 'Address' }];
+  allColumns = [{ name: 'Name' }, { name: 'Last Name' }, { name: 'Gender' }, { name: 'Phone' }, { name: 'Email' }, { name: 'Address' }];
 
 
   data = [];
@@ -38,8 +40,8 @@ export class AdvanceTableComponent implements OnInit {
 
   addRowForm: FormGroup;
 
-  constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder) {
-
+  constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService) {
+   
     this.basicForm = this.fb.group({
       id: new FormControl(),
       firstName: new FormControl(),
@@ -97,6 +99,7 @@ export class AdvanceTableComponent implements OnInit {
   deleteRow(row) {
     // console.log(row.id);
     this.data = this.arrayRemove(this.data, row.id)
+    this.utilisateurService.deleteAssure(row.id).subscribe()
     this.showNotification("bg-red", "Utilisateur supprimé avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
 
@@ -117,7 +120,9 @@ export class AdvanceTableComponent implements OnInit {
         value.address = form.value.address;
       }
       $('#editModal').modal('hide');
-
+      this.utilisateurService.updateAssure(form.value.id , form).subscribe(
+        // console.log("update") ; 
+      )
       return true;
     });
     this.showNotification("bg-black", "Modification avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
@@ -126,22 +131,34 @@ export class AdvanceTableComponent implements OnInit {
   onAddRowSave(form: FormGroup) {
     this.data.push(form.value);
     this.data = [...this.data];
+    this.utilisateurService.createUtilisateur(this.data).subscribe(
+      // console.log("update") ; 
+    )
     // console.log(this.data);
     form.reset();
     $('#addModal').modal('hide');
     this.showNotification("bg-green", "Utilisateur ajouté avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
 
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', 'assets/data/adv-tbl-data.json');
+  // fetch(cb) {
+  //   const req = new XMLHttpRequest();
+  //   req.open('GET', 'assets/data/adv-tbl-data.json');
 
-    req.onload = () => {
-      const data = JSON.parse(req.response);
-      cb(data);
-    };
+  //   req.onload = () => {
+  //     const data = JSON.parse(req.response);
+  //     cb(data);
+  //   };
 
-    req.send();
+  //   req.send();
+  // }
+
+  getAllAssure(){
+    this.utilisateurService.getUtilisateursList().subscribe(
+      data =>{
+        this.listUstilisateurs = data; 
+        console.log(data) ; 
+      }
+    )
   }
 
   filterDatatable(event) {

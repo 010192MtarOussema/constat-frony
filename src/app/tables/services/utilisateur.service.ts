@@ -35,6 +35,7 @@ export class UtilisateurService {
 }
 
 export class Utilisateur {
+  constructor(){}
   id : any;
   nom: any;
   prenom: any;

@@ -12,6 +12,7 @@ import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { SupportComponent } from './support/support.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     CommonModule,
     AppsRoutingModule,
     FullCalendarModule,
+    NgxDatatableModule,
     DragulaModule.forRoot()
   ]
 })
