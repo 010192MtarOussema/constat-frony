@@ -1,12 +1,26 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Basic Examples -->
-        <div class="alert alert-info">
-            Advance table component is develop using <strong>ngx-datatable</strong> angular plugin. Main features of
-            this table is search record in table, add new record, edit record, delete record, sorting data by
-            ascending and descending, pagination, and many more. You have just replace table static json data with your
-            dynamic json data comes from your api.
-        </div>
+      
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul class="breadcrumb breadcrumb-style ">
+                            <li class="breadcrumb-item">
+                                <h4 class="page-title">Listes Des Utilisateurs </h4>
+                            </li>
+                            <!-- <li class="breadcrumb-item bcrumb-1">
+                                <a routerLink="/dashboard/main">
+                                    <i class="fas fa-home"></i> Home</a>
+                            </li>
+                            <li class="breadcrumb-item bcrumb-2">
+                                <a href="#" onClick="return false;">Tables</a>
+                            </li>
+                            <li class="breadcrumb-item active">ngx-datatable</li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
@@ -17,13 +31,9 @@
 
                                     <ul class="header-buttons-left m-l-5">
                                         <li class="dropdown m-l-20">
-                                            <h2>
-                                                <strong>Advance Table</strong></h2>
-                                        </li>
-                                        <li class="dropdown m-l-20">
                                             <label for="search-input"><i
-                                                    class="material-icons search-icon">search</i></label>
-                                            <input placeholder="Search" type="text" class="browser-default search-field"
+                                                    class="material-icons search-icon"> search</i></label>
+                                            <input placeholder="Chercher" type="text" class="browser-default search-field"
                                                 (keyup)='filterDatatable($event)' aria-label="Search box">
                                         </li>
                                     </ul>
@@ -85,10 +95,10 @@
                                             <div class="modal-header">
                                                 <div class="editRowModal">
                                                     <div class="modal-header clearfix">
-                                                        <img [src]='newUserImg' alt="avatar">
+                                                        <!-- <img [src]='newUserImg' alt="avatar"> -->
                                                         <div class="modal-about">
                                                             <div class="font-weight-bold p-t-10 font-17">
-                                                                New User</div>
+                                                                 Inscription</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -109,45 +119,71 @@
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">perm_identity</i>
                                                             <input formControlName="firstName" class="form-control"
-                                                                placeholder="First Name">
+                                                                placeholder="Nom ">
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">perm_identity</i>
                                                             <input formControlName="lastName" class="form-control"
-                                                                placeholder="Last Name">
+                                                                placeholder="Prénom">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">credit_card</i>
+                                                            <input formControlName="firstName" class="form-control"
+                                                                placeholder="Numéro CIN ">
+                                                        </div>
+                                                      
+                                                        <div class="input-field col s6 form-line">
+                                                            <i class="material-icons prefix">date_range</i>
+
+                                                            <input type="date" formControlName="lastName" class="form-control date"
+                                                                placeholder="Ex: 30/07/2016">
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">phone</i>
                                                             <input formControlName="phone" class="form-control"
-                                                                placeholder="Phone">
+                                                                placeholder="Téléphone">
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">face</i>
                                                             <div
                                                                 class="p-l-40 input-field materialize-select col s12 ngx-table-form-select">
                                                                 <select formControlName="gender">
-                                                                    <option value="" disabled selected>Select Gender
+                                                                    <option value="" disabled selected>Select Proffession
                                                                     </option>
-                                                                    <option value="male">Male</option>
-                                                                    <option value="female">Female</option>
+                                                                    <option value="Expert">Expert</option>
+                                                                    <option value="Préstataire">Préstataire</option>
+                                                                    <option value="Assuré">Assuré</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="input-field col s12">
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">perm_identity</i>
+                                                            <input formControlName="firstName" class="form-control"
+                                                                placeholder="Nom Utilisateur ">
+                                                        </div>
+                                                        <div class="input-field col s6">
+                                                            <!-- <i class="material-icons prefix">perm_identity</i> -->
+                                                            <i class="material-icons prefix">vpn_key</i>
+                                                            <input type="password" formControlName="lastName" class="form-control"
+                                                                placeholder="Mot De Passe">
+                                                        </div>
+                                                        <!-- <div class="input-field col s12">
                                                             <i class="material-icons prefix">mail_outline</i>
                                                             <input formControlName="email" class="form-control"
                                                                 placeholder="Email">
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="row">
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">store_mall_directory</i>
                                                             <input formControlName="address" class="form-control"
-                                                                placeholder="Address">
+                                                                placeholder="Addresse">
                                                         </div>
                                                     </div>
 

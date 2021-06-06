@@ -97,7 +97,7 @@ export class AdvanceTableComponent implements OnInit {
   deleteRow(row) {
     // console.log(row.id);
     this.data = this.arrayRemove(this.data, row.id)
-    this.showNotification("bg-red", "Delete Record Successfully", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
+    this.showNotification("bg-red", "Utilisateur supprimé avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
 
   arrayRemove(array, id) {
@@ -120,7 +120,7 @@ export class AdvanceTableComponent implements OnInit {
 
       return true;
     });
-    this.showNotification("bg-black", "Edit Record Successfully", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
+    this.showNotification("bg-black", "Modification avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
 
   onAddRowSave(form: FormGroup) {
@@ -129,7 +129,7 @@ export class AdvanceTableComponent implements OnInit {
     // console.log(this.data);
     form.reset();
     $('#addModal').modal('hide');
-    this.showNotification("bg-green", "Add Record Successfully", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
+    this.showNotification("bg-green", "Utilisateur ajouté avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
 
   fetch(cb) {
