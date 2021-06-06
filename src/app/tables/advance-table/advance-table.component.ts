@@ -28,10 +28,11 @@ export class AdvanceTableComponent implements OnInit {
 
 
   columns = [
-    { name: 'Name' }, { name: 'Last Name' }, { name: 'Gender' }, { name: 'Phone' }, { name: 'Email' }, { name: 'Address' }
-  ];
+    { name: 'Nom' }, { name: 'Prenom' }, { name: 'Date De Naissance' }, { name: 'Adresse' }, { name: 'Télephone' }, { name: 'Numero Cin' }
+    , { name: 'Profession' } , { name: 'Nom Utilisateur' }  ];
 
-  allColumns = [{ name: 'Name' }, { name: 'Last Name' }, { name: 'Gender' }, { name: 'Phone' }, { name: 'Email' }, { name: 'Address' }];
+  allColumns = [  { name: 'Nom' }, { name: 'Prenom' }, { name: 'Date De Naissance' }, { name: 'Adresse' }, { name: 'Télephone' }, { name: 'Numero Cin' }
+  , { name: 'Profession' } , { name: 'Nom Utilisateur' } ];
 
 
   data = [];
@@ -53,23 +54,24 @@ export class AdvanceTableComponent implements OnInit {
 
     this.addRowForm = this.fb.group({
       id: new FormControl(),
-      img: new FormControl(),
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      phone: new FormControl(),
-      email: new FormControl(),
-      gender: new FormControl(),
-      address: new FormControl()
+      nom: new FormControl(),
+      prenom: new FormControl(),
+      dateDeNaissance: new FormControl(),
+      telephone: new FormControl(),
+      numeroCin: new FormControl(),
+      Profession: new FormControl(),
+      motDePasse: new FormControl() , 
+      nomUtilisateur: new FormControl() 
     });
   }
 
   ngOnInit() {
-    $('select').formSelect();
-    this.fetch((data) => {
-      this.data = data;
-      // copy over dataset to empty object
-      this.filteredData = data;
-    });
+    // $('select').formSelect();
+    // this.fetch((data) => {
+    //   this.data = data;
+    //   // copy over dataset to empty object
+    //   this.filteredData = data;
+    // });
   }
 
   editRow(row) {
