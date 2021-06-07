@@ -12,6 +12,7 @@ import { NgxDatatableComponent } from './ngx-datatable/ngx-datatable.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DatatablesComponent } from './datatables/datatables.component';
 import { AdvanceTableComponent } from './advance-table/advance-table.component';
+import { UtilisateurService } from './services/utilisateur.service';
 
 @NgModule({
   declarations: [ChildRowComponent, BasicTableComponent, GroupTableComponent, ExportTableComponent, EditableTableComponent, NgxDatatableComponent, DatatablesComponent, AdvanceTableComponent],

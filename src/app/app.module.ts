@@ -12,6 +12,8 @@ import { SidebarComponent } from "./layout/sidebar/sidebar.component";
 import { RightSidebarComponent } from "./layout/right-sidebar/right-sidebar.component";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { DynamicScriptLoaderService } from "./services/dynamic-script-loader.service";
+import { UtilisateurService } from "./tables/services/utilisateur.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -25,12 +27,13 @@ import { DynamicScriptLoaderService } from "./services/dynamic-script-loader.ser
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModule,
     ReactiveFormsModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    DynamicScriptLoaderService
+    DynamicScriptLoaderService , UtilisateurService
   ],
   bootstrap: [AppComponent]
 })

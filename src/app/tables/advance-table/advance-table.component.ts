@@ -25,13 +25,14 @@ export class AdvanceTableComponent implements OnInit {
   selectedRowData: selectRowInterface;
   newUserImg = "assets/images/user/user1.jpg";
    listUstilisateurs : any ; 
+   user   : any ; 
 
 
   columns = [
-    { name: 'Nom' }, { name: 'Prenom' }, { name: 'Date De Naissance' }, { name: 'Adresse' }, { name: 'Télephone' }, { name: 'Numero Cin' }
+    { name: 'nom' }, { name: 'Prenom' }, { name: 'Date De Naissance' }, { name: 'Adresse' }, { name: 'Télephone' }, { name: 'Numero Cin' }
     , { name: 'Profession' } , { name: 'Nom Utilisateur' }  ];
 
-  allColumns = [  { name: 'Nom' }, { name: 'Prenom' }, { name: 'Date De Naissance' }, { name: 'Adresse' }, { name: 'Télephone' }, { name: 'Numero Cin' }
+  allColumns = [  { name: 'nom' }, { name: 'Prenom' }, { name: 'Date De Naissance' }, { name: 'Adresse' }, { name: 'Télephone' }, { name: 'Numero Cin' }
   , { name: 'Profession' } , { name: 'Nom Utilisateur' } ];
 
 
@@ -42,30 +43,35 @@ export class AdvanceTableComponent implements OnInit {
   addRowForm: FormGroup;
 
   constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService) {
-   
-    this.basicForm = this.fb.group({
-      id: new FormControl(),
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      phone: new FormControl(),
-      email: new FormControl(),
-      address: new FormControl()
-    });
 
-    this.addRowForm = this.fb.group({
-      id: new FormControl(),
+    this.basicForm = this.fb.group({
+      id : new FormControl(),
       nom: new FormControl(),
       prenom: new FormControl(),
       dateDeNaissance: new FormControl(),
       telephone: new FormControl(),
       numeroCin: new FormControl(),
-      Profession: new FormControl(),
+      selectionProfession: new FormControl(),
       motDePasse: new FormControl() , 
-      nomUtilisateur: new FormControl() 
+      nomUtilisateur: new FormControl() ,
+      adresse : new FormControl() 
+    });
+
+    this.addRowForm = this.fb.group({
+      nom: new FormControl(),
+      prenom: new FormControl(),
+      dateDeNaissance: new FormControl(),
+      telephone: new FormControl(),
+      numeroCin: new FormControl(),
+      selectionProfession: new FormControl(),
+      motDePasse: new FormControl() , 
+      nomUtilisateur: new FormControl() ,
+      adresse : new FormControl() 
     });
   }
 
   ngOnInit() {
+    this.getAllAssure() ; 
     // $('select').formSelect();
     // this.fetch((data) => {
     //   this.data = data;
@@ -76,13 +82,17 @@ export class AdvanceTableComponent implements OnInit {
 
   editRow(row) {
     this.basicForm.patchValue({
-      id: row.id,
-      firstName: row.firstName,
-      lastName: row.lastName,
-      phone: row.phone,
-      email: row.email,
-      address: row.address,
-      img: row.img
+      id : row.id , 
+      nom: row.nom,
+      prenom: row.prenom,
+      dateDeNaissance: row.dateDeNaissance,
+      telephone: row.telephone,
+      numeroCin: row.numeroCin,
+      selectionProfession: row.selectionProfession,
+      motDePasse: row.motDePasse,
+      nomUtilisateur: row.nomUtilisateur,
+      adresse: row.adresse,
+
     });
     this.selectedRowData = row;
 
@@ -100,8 +110,12 @@ export class AdvanceTableComponent implements OnInit {
 
   deleteRow(row) {
     // console.log(row.id);
-    this.data = this.arrayRemove(this.data, row.id)
-    this.utilisateurService.deleteAssure(row.id).subscribe()
+    // this.data = this.arrayRemove(this.data, row.id)
+    console.log(row.id)
+    this.utilisateurService.deleteAssure(row.id).subscribe(data=>{
+      this.getAllAssure();
+    })
+    
     this.showNotification("bg-red", "Utilisateur supprimé avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
 
@@ -113,17 +127,25 @@ export class AdvanceTableComponent implements OnInit {
   }
 
   onEditSave(form: FormGroup) {
-    this.data = this.data.filter((value, key) => {
+    
+    this.listUstilisateurs = this.listUstilisateurs.filter((value, key) => {
       if (value.id == form.value.id) {
-        value.firstName = form.value.firstName;
-        value.lastName = form.value.lastName;
-        value.phone = form.value.phone;
-        value.email = form.value.email;
-        value.address = form.value.address;
+        value.motDePasse = form.value.motDePasse;
+        value.adresse = form.value.adresse;
+        value.telephone = form.value.telephone;
+
+      
       }
       $('#editModal').modal('hide');
-      this.utilisateurService.updateAssure(form.value.id , form).subscribe(
-        // console.log("update") ; 
+      
+      console.log("id a modifier" ,form )
+      this.utilisateurService.updateAssure(form.value.id , form.value).subscribe(
+        data=>{
+              this.user = data ; 
+          
+          console.log("update",this.user) ; 
+          this.getAllAssure();
+        }
       )
       return true;
     });
@@ -131,13 +153,18 @@ export class AdvanceTableComponent implements OnInit {
   }
 
   onAddRowSave(form: FormGroup) {
-    this.data.push(form.value);
-    this.data = [...this.data];
-    this.utilisateurService.createUtilisateur(this.data).subscribe(
-      // console.log("update") ; 
+    // this.data.push(form.value);
+    // this.data = [...this.data];
+    console.log(form.value)
+    this.utilisateurService.createUtilisateur(form.value).subscribe(
+      data =>{
+        console.log(data)
+        this.getAllAssure();
+      }
+      // console.log("upda
     )
-    // console.log(this.data);
     form.reset();
+   
     $('#addModal').modal('hide');
     this.showNotification("bg-green", "Utilisateur ajouté avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
@@ -153,12 +180,12 @@ export class AdvanceTableComponent implements OnInit {
 
   //   req.send();
   // }
-
+//get list assure from back 
   getAllAssure(){
     this.utilisateurService.getUtilisateursList().subscribe(
       data =>{
         this.listUstilisateurs = data; 
-        console.log(data) ; 
+        console.log("LIST ASSURES" , data) ; 
       }
     )
   }

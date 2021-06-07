@@ -769,16 +769,19 @@
                     </div>
                     <div class="body">
                         <div class="row clearfix">
-                            <div class="col-md-3">
-                                <div class="input-field materialize-select col s12">
-                                    <select>
-                                        <option value="" disabled selected>Choose your option</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">face</i>
+                                <div
+                                    class="p-l-40 input-field materialize-select col s12 ngx-table-form-select">
+                                    <select formControlName="gender">
+                                        <option value="" disabled selected>Select Proffession
+                                        </option>
+                                        <option value="Expert">Expert</option>
+                                        <option value="Préstataire">Préstataire</option>
+                                        <option value="Assuré">Assuré</option>
                                     </select>
-                                    <label>Materialize Select</label>
                                 </div>
+                          
                             </div>
 
                             <div class="col-md-3">

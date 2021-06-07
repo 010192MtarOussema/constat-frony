@@ -51,22 +51,14 @@
 
                                     </ul>
                                 </div>
-                                <ngx-datatable #table class="material" [rows]="data" [columns]="columns"
-                                    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                                <ngx-datatable #table class="material" [rows]="listUstilisateurs" [columns]="columns"
+                                [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
                                     [rowHeight]="'60'" [limit]="10">
-                                    <!-- user image -->
-                                    <ngx-datatable-column name="Image" sortable="false" prop="img" [width]="100">
-                                        <ng-template let-row="data" let-value="value" let-i="index"
-                                            ngx-datatable-cell-template>
-                                            <td class="table-img padding-0">
-                                                <img width="40" src="{{ value }}" />
-                                            </td>
-                                        </ng-template>
-                                    </ngx-datatable-column>
-                                    <ngx-datatable-column name="Nom" [width]="130"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Prenom" [width]="130"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Date De Naissance" [width]="120"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Adresse" [width]="200"></ngx-datatable-column>
+                                 
+                                    <ngx-datatable-column name="nom" [width]="130" ></ngx-datatable-column>
+                                    <ngx-datatable-column name="prenom" [width]="130"></ngx-datatable-column>
+                                    <ngx-datatable-column name="dateDeNaissance" [width]="120"></ngx-datatable-column>
+                                    <ngx-datatable-column name="adresse" [width]="200"></ngx-datatable-column>
                                     <ngx-datatable-column name="Télephone" [width]="200"></ngx-datatable-column>
                                     <ngx-datatable-column name="Numero Cin" [width]="200"></ngx-datatable-column>
                                     <ngx-datatable-column name="Profession" [width]="200"></ngx-datatable-column>
@@ -94,6 +86,7 @@
                                 <!-- Add Record Modal Window -->
                                 <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -112,50 +105,53 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+                                                
                                                 <form [formGroup]="addRowForm" (ngSubmit)="onAddRowSave(addRowForm)">
-                                                    <div class="input-field col s12 d-none">
-                                                        <input formControlName="id" class="form-control" type="hidden">
+                                                    <!-- <div class="input-field col s12 d-none">
+                                                        <input formControlName="nom" class="form-control" type="hidden">
                                                     </div>
                                                     <div class="input-field col s12 d-none">
-                                                        <input formControlName="img" class="form-control" type="hidden">
-                                                    </div>
+                                                        <input formControlName="prenom" class="form-control" type="hidden">
+                                                    </div> -->
                                                     <div class="row">
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">perm_identity</i>
-                                                            <input formControlName="firstName" class="form-control"
+                                                            <input formControlName="nom" class="form-control"
                                                                 placeholder="Nom ">
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">perm_identity</i>
-                                                            <input formControlName="lastName" class="form-control"
+                                                            <input formControlName="prenom" class="form-control"
                                                                 placeholder="Prénom">
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">credit_card</i>
-                                                            <input formControlName="firstName" class="form-control"
+                                                            <input formControlName="numeroCin" class="form-control"
                                                                 placeholder="Numéro CIN ">
                                                         </div>
                                                       
                                                         <div class="input-field col s6 form-line">
                                                             <i class="material-icons prefix">date_range</i>
 
-                                                            <input type="date" formControlName="lastName" class="form-control date"
+                                                            <input type="date" formControlName="dateDeNaissance" class="form-control date"
                                                                 placeholder="Ex: 30/07/2016">
                                                         </div>
                                                     </div>
+                                                   
+                                                   
                                                     <div class="row">
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">phone</i>
-                                                            <input formControlName="phone" class="form-control"
+                                                            <input formControlName="telephone" class="form-control"
                                                                 placeholder="Téléphone">
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">face</i>
                                                             <div
                                                                 class="p-l-40 input-field materialize-select col s12 ngx-table-form-select">
-                                                                <select formControlName="gender">
+                                                                <select formControlName="selectionProfession">
                                                                     <option value="" disabled selected>Select Proffession
                                                                     </option>
                                                                     <option value="Expert">Expert</option>
@@ -168,13 +164,13 @@
                                                     <div class="row">
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">perm_identity</i>
-                                                            <input formControlName="firstName" class="form-control"
+                                                            <input formControlName="nomUtilisateur" class="form-control"
                                                                 placeholder="Nom Utilisateur ">
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <!-- <i class="material-icons prefix">perm_identity</i> -->
                                                             <i class="material-icons prefix">vpn_key</i>
-                                                            <input type="password" formControlName="lastName" class="form-control"
+                                                            <input type="password" formControlName="motDePasse" class="form-control"
                                                                 placeholder="Mot De Passe">
                                                         </div>
                                                         <!-- <div class="input-field col s12">
@@ -186,18 +182,18 @@
                                                     <div class="row">
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">store_mall_directory</i>
-                                                            <input formControlName="address" class="form-control"
-                                                                placeholder="Addresse">
+                                                            <input formControlName="adresse" class="form-control"
+                                                                placeholder="Adresse">
                                                         </div>
                                                     </div>
 
                                                     <div class="modal-footer">
                                                         <div class="button-demo">
                                                             <button type="submit"
-                                                                class="btn btn-outline-success btn-border-radius">Save</button>
+                                                                class="btn btn-outline-success btn-border-radius">Enregistrer</button>
                                                             <button type="button"
                                                                 class="btn btn-outline-warning btn-border-radius"
-                                                                data-dismiss="modal">Cancel</button>
+                                                                data-dismiss="modal">Annuler</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -213,11 +209,9 @@
                                             <div class="modal-header">
                                                 <div class="editRowModal">
                                                     <div class="modal-header clearfix">
-                                                        <img [src]='selectedRowData?.img' alt="avatar">
                                                         <div class="modal-about">
                                                             <div class="font-weight-bold p-t-10 font-17">
-                                                                {{selectedRowData?.firstName}}
-                                                                {{selectedRowData?.lastName}}</div>
+                                                                 Modification</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -229,53 +223,81 @@
                                             <div class="modal-body">
                                                 <form [formGroup]="basicForm" (ngSubmit)="onEditSave(basicForm)">
 
-                                                    <div class="input-field col s12 d-none">
-                                                        <input formControlName="id" class="form-control" type="hidden">
-                                                    </div>
+                                                  
                                                     <div class="row">
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">perm_identity</i>
-                                                            <input id="icon_prefix" formControlName="firstName"
-                                                                type="text" class="validate">
-                                                            <label for="icon_prefix">First Name</label>
+                                                            <input formControlName="nom" class="form-control"
+                                                                placeholder="Nom " >
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">perm_identity</i>
-                                                            <input id="icon_telephone" formControlName="lastName"
-                                                                type="text" class="validate">
-                                                            <label for="icon_telephone">Last Name</label>
+                                                            <input formControlName="prenom" class="form-control"
+                                                                placeholder="Prénom" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="input-field col s6">
-                                                            <i class="material-icons prefix">phone</i>
-                                                            <input id="icon_telephone" formControlName="phone"
-                                                                type="text" class="validate">
-                                                            <label for="icon_telephone">Phone</label>
+                                                            <i class="material-icons prefix">credit_card</i>
+                                                            <input formControlName="numeroCin" class="form-control"
+                                                                placeholder="Numéro CIN " disabled>
                                                         </div>
-                                                        <div class="input-field col s6">
-                                                            <i class="material-icons prefix">mail_outline</i>
-                                                            <input id="icon_telephone" formControlName="email"
-                                                                type="text" class="validate">
-                                                            <label for="icon_telephone">Email</label>
+                                                      
+                                                        <div class="input-field col s6 form-line">
+                                                            <i class="material-icons prefix">date_range</i>
+
+                                                            <input type="date" formControlName="dateDeNaissance" class="form-control date"
+                                                                placeholder="Ex: 30/07/2016" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="input-field col s12">
-                                                            <i class="material-icons prefix">store_mall_directory</i>
-                                                            <input id="icon_prefix" formControlName="address"
-                                                                type="text" class="validate">
-                                                            <label for="icon_prefix">Address</label>
+                                                            <i class="material-icons prefix">phone</i>
+                                                            <input formControlName="telephone" class="form-control"
+                                                                placeholder="Téléphone">
                                                         </div>
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">face</i>
+                                                            <div
+                                                                class="p-l-40 input-field materialize-select col s12 ngx-table-form-select">
+                                                                <select formControlName="selectionProfession" class="form-control" disabled>
+                                                                    <option value="" disabled selected>Select Profession
+                                                                    </option>
+                                                                    <option value="Expert">Expert</option>
+                                                                    <option value="Préstataire">Préstataire</option>
+                                                                    <option value="Assuré">Assuré</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>   
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">perm_identity</i>
+                                                            <input formControlName="nomUtilisateur" class="form-control"
+                                                                placeholder="Nom Utilisateur " disabled>
+                                                        </div>
+                                                        <div class="input-field col s6">
+                                                            <!-- <i class="material-icons prefix">perm_identity</i> -->
+                                                            <i class="material-icons prefix">vpn_key</i>
+                                                            <input type="password" formControlName="motDePasse" class="form-control"
+                                                                placeholder="Mot De Passe">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="input-field col s12">
+                                                                <i class="material-icons prefix">store_mall_directory</i>
+                                                                <input formControlName="adresse" class="form-control"
+                                                                    placeholder="Adresse">
+                                                            </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <div class="button-demo">
                                                             <button type="submit"
-                                                                class="btn btn-outline-success btn-border-radius">Save</button>
+                                                                class="btn btn-outline-success btn-border-radius">Modifier</button>
                                                             <button type="button"
                                                                 class="btn btn-outline-warning btn-border-radius"
-                                                                data-dismiss="modal">Cancel</button>
+                                                                data-dismiss="modal">Annuler</button>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </form>
                                             </div>
