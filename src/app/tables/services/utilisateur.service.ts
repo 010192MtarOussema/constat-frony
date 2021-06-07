@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilisateurService {
-    private url='http://localhost:9080/'
+    private url='http://localhost:9070/'
    
   constructor(private http: HttpClient) { }
 
@@ -43,7 +43,7 @@ export class Utilisateur {
   adresse: any;
   telephone:any;
   numeroCin:any;
-  selectionProfession:any;
+  profession:any;
   motDePasse:any;
   nomUtilisateur:any
 }

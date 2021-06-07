@@ -51,7 +51,7 @@ export class AdvanceTableComponent implements OnInit {
       dateDeNaissance: new FormControl(),
       telephone: new FormControl(),
       numeroCin: new FormControl(),
-      selectionProfession: new FormControl(),
+      profession: new FormControl(),
       motDePasse: new FormControl() , 
       nomUtilisateur: new FormControl() ,
       adresse : new FormControl() 
@@ -63,7 +63,7 @@ export class AdvanceTableComponent implements OnInit {
       dateDeNaissance: new FormControl(),
       telephone: new FormControl(),
       numeroCin: new FormControl(),
-      selectionProfession: new FormControl(),
+      profession: new FormControl(),
       motDePasse: new FormControl() , 
       nomUtilisateur: new FormControl() ,
       adresse : new FormControl() 
@@ -88,7 +88,7 @@ export class AdvanceTableComponent implements OnInit {
       dateDeNaissance: row.dateDeNaissance,
       telephone: row.telephone,
       numeroCin: row.numeroCin,
-      selectionProfession: row.selectionProfession,
+      profession: row.selectionProfession,
       motDePasse: row.motDePasse,
       nomUtilisateur: row.nomUtilisateur,
       adresse: row.adresse,
