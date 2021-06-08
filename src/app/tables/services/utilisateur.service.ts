@@ -36,14 +36,7 @@ export class UtilisateurService {
 
 export class Utilisateur {
   constructor(){}
-  id : any;
-  nom: any;
-  prenom: any;
-  dateDeNaissance: any;
-  adresse: any;
-  telephone:any;
-  numeroCin:any;
-  profession:any;
-  motDePasse:any;
-  nomUtilisateur:any
+ id?: any ;
+  motDePasse?:any;
+  nomUtilisateur?:any
 }

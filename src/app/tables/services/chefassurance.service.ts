@@ -32,7 +32,7 @@ export class ChefAssuranceService {
   }
 
 }
-export class Expert {
+export class chefassurance {
   constructor(){}
   id : any;
   nom: any;
