@@ -2,8 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader.service';
+
 import { DemandeService } from 'src/app/tables/services/demande.service';
 import { UtilisateurService } from 'src/app/tables/services/utilisateur.service';
+import { ReclamationService } from 'src/app/tables/services/reclamation.service';
+
 
 
 @Component({
@@ -13,33 +16,53 @@ import { UtilisateurService } from 'src/app/tables/services/utilisateur.service'
 })
 export class reclamationComponent {
 
-    cols = [{ name: 'NomAssure' }, { name: 'Réclamation' }, { name: 'dateDeCreation' }];
-    allcols = [{ name: 'NomAssure' }, { name: 'Réclamation' }, { name: 'dateDeCreation' }];
+
+    cols = [{ name: 'nomAssure' }, { name: 'Objet' }, { name: 'dateDeCreationDeReclamation' }];
+    allcols = [{ name: 'nomAssure' }, { name: 'Objet' }, { name: 'Date de creation de reclamation' }];
+
     data = [];
     filteredData = [];
   
   
     @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
-    listDemandes : any ; 
+
+
+    listReclamations : any ; 
     basicForm: FormGroup;
   
     addRowForm: FormGroup;
-    constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService , private demandeService :DemandeService) {
-
+  
+    constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder ,private reclamationService :ReclamationService) { 
 
       this.basicForm = this.fb.group({
         id : new FormControl(),
-        dateDeCreation: new FormControl(),
+        Objet: new FormControl(),
         nomAssure: new FormControl(),
+        dateDeCreationDeReclamation: new FormControl(),
        
 
       });
-
-
-     }
+    }
   
- 
+    ngOnInit() {
+
+      this.getReclamationsList() ; 
   
+      this.fetch((data) => {
+        this.data = data;
+        // copy over dataset to empty object
+        this.filteredData = data;
+      });
+    }
+    detailRow(){}
+    getReclamationsList(){
+      this.reclamationService.getReclamationsList().subscribe(
+        data =>{
+          this.listReclamations = data; 
+          console.log("LIST ReclamationS" , data) ; 
+        }
+      )
+    }
     fetch(cb) {
       const req = new XMLHttpRequest();
       req.open('GET', 'assets/data/ngx-data.json');

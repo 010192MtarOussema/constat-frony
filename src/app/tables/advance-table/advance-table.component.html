@@ -51,7 +51,7 @@
 
                                     </ul>
                                 </div>
-                                <ngx-datatable #table class="material" [rows]="     listUstilisateurs" [columns]="columns"
+                                <ngx-datatable #table class="material" [rows]="listUstilisateurs" [columns]="columns"
                                 [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
                                     [rowHeight]="'60'" [limit]="10">
                                  
@@ -80,7 +80,7 @@
                                                     <i class="material-icons">delete</i>
                                                 </button>
                                                 <button class="btn tblActnBtn h-auto" data-toggle="modal"
-                                                data-target="#detailModal" (click)="detailRow(row)">
+                                                data-target="#detailModal" (click)='detailRow(row)'>
                                                 <i class="material-icons">description</i>
                                             </button>
 
@@ -197,6 +197,12 @@
                                                             <input formControlName="adresse" class="form-control"
                                                                 placeholder="Adresse">
                                                         </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">store_mall_directory</i>
+                                                            <input formControlName="numContratAssurance" class="form-control"
+                                                                placeholder="Numero de contrat">
+                                                        </div>
+
                                                     </div>
 
 
@@ -408,20 +414,126 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                          
+            
 
-                                              
-                                                 
-                                  <!--- <ngx-datatable-column name="Nom" [width]="170" ></ngx-datatable-column>
-                                    <ngx-datatable-column name="Prenom" [width]="180"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Date De Naissance" [width]="200"></ngx-datatable-column>
-                                    <ngx-datatable-column name="adresse" [width]="150"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Telephone" [width]="190"></ngx-datatable-column>--> 
-                                    <ngx-datatable-column name="Nom Utilisateur" [width]="200"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Numero Cin" [width]="200"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Profession" [width]="200"></ngx-datatable-column>
+
+                                            <form [formGroup]="basicForm" (ngSubmit)="onEditSave(basicForm)">
+
+                                                  
+                                                <div class="row">
+                                                    <div class="input-field col s6">
+                                                        <i class="material-icons prefix">perm_identity</i>
+                                                        <input formControlName="nom" class="form-control"
+                                                            placeholder="Nom " disabled>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <i class="material-icons prefix">perm_identity</i>
+                                                        <input formControlName="prenom" class="form-control"
+                                                            placeholder="Prénom" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s6">
+                                                        <i class="material-icons prefix">credit_card</i>
+                                                        <input formControlName="numeroCin" class="form-control"
+                                                            placeholder="Numéro CIN " disabled>
+                                                    </div>
+                                                  
+                                                    <div class="input-field col s6 form-line">
+                                                        <i class="material-icons prefix">date_range</i>
+
+                                                        <input type="date" formControlName="dateDeNaissance" class="form-control date"
+                                                            placeholder="Ex: 30/07/2016" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">phone</i>
+                                                        <input formControlName="telephone" class="form-control"
+                                                            placeholder="Téléphone" disabled>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <i class="material-icons prefix">face</i>
+                                                        <div
+                                                            class="p-l-40 input-field materialize-select col s12 ngx-table-form-select">
+                                                            <select formControlName="profession" class="form-control" disabled>
+                                                                <option value="" disabled selected>Select Profession
+                                                                </option>
+                                                                <option value="Expert">Expert</option>
+                                                                <option value="Préstataire">Préstataire</option>
+                                                                <option value="Assuré">Assuré</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>   
+                                                </div>
+                                                <div class="row">
                                                    
-                                                   
+                                                    <div class="row">
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">store_mall_directory</i>
+                                                            <input formControlName="adresse" class="form-control"
+                                                                placeholder="Adresse" disabled>
+                                                        </div>
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">perm_identity</i>
+                                                            <input formControlName="nomUtilisateur" class="form-control"
+                                                                placeholder="Nom Utilisateur " disabled>
+                                                        </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">account_balance</i>
+                                                        <input formControlName="nomAssurance" class="form-control"
+                                                            placeholder="Nom d'assurance:" disabled>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <i class="material-icons prefix">perm_identity</i>
+                                                        <input formControlName="adresseAssurance" class="form-control"
+                                                            placeholder="Adresse d'assurance: " disabled>
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <i class="material-icons prefix">credit_card</i>
+                                                    <input formControlName="numContratAssurance" class="form-control"
+                                                        placeholder="Numéro de contrat d'assurance:" disabled>
+                                                </div>
+                   
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">directions_car</i>
+                                                <input formControlName="couleur" class="form-control"
+                                                    placeholder="Couleur:" disabled>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <i class="material-icons prefix">directions_car</i>
+                                                <input formControlName="marque" class="form-control"
+                                                    placeholder="Marque de voiture:" disabled>
+                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">credit_card</i>
+                                            <input formControlName="numeroImmatriculation" class="form-control"
+                                                placeholder="Numéro d'immatriculation:" disabled>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">credit_card</i>
+                                            <input formControlName="numeroPermis" class="form-control"
+                                                placeholder="Numéro de permis:" disabled>
+                                        </div>
+                                </div>
+                                                </div>
+                                            </form>
+
+
+
+
+
+
+
                                         </div>
                                     </div>
                                 </div>

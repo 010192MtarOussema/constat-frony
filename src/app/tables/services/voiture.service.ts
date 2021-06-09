@@ -30,3 +30,12 @@ createVoiture(voiture: Object): Observable<Object> {
     return this.http.put(this.url+'voiture/modifier/'+id ,value);
   }
 }
+
+export class Voiture {
+  constructor(){}
+ id?: any ;
+ marque?:any;
+ numeroImmatriculation?:any
+ couleur?:any;
+ numeroPermis?:any;
+}
