@@ -13,10 +13,14 @@ import { SupportComponent } from './support/support.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { reclamationComponent } from './reclamation/reclamation.component';
+import { indemnisationComponent } from './indemnisation/indemnisation.component';
 
 @NgModule({
   declarations: [
     CalendarComponent,
+    indemnisationComponent,
+    reclamationComponent,
     ChatComponent,
     DragDropComponent,
     PortfolioComponent,

@@ -1,0 +1,43 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Listes Des Réclamations </h4>
+                        </li>
+                        <!-- <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/dashboard/main">
+                                <i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">Tables</a>
+                        </li>
+                        <li class="breadcrumb-item active">ngx-datatable</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Basic Examples -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                   
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="text" class="ngx-search" placeholder="Chercher ...."
+                                    (keyup)='filterDatatable($event)'>
+                                <ngx-datatable #table class="material" [rows]="data" [columns]="cols"
+                                    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                                    [rowHeight]="'auto'" [limit]="10">
+                                </ngx-datatable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -7,9 +7,18 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { SupportComponent } from './support/support.component';
 import { DragDropComponent } from './drag-drop/drag-drop.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { reclamationComponent } from './reclamation/reclamation.component';
+import { indemnisationComponent } from './indemnisation/indemnisation.component';
 
 const routes: Routes = [
-
+  {
+    path: 'reclamation',
+    component: reclamationComponent
+  },
+  {
+    path: 'indemnisation',
+    component: indemnisationComponent
+  },
   {
     path: 'calendar',
     component: CalendarComponent
