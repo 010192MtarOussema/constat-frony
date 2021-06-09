@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader.service';
+import { DemandeService } from 'src/app/tables/services/demande.service';
+import { UtilisateurService } from 'src/app/tables/services/utilisateur.service';
 
 
 @Component({
@@ -9,22 +13,50 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 })
 export class CalendarComponent {
 
-    cols = [{ name: 'First Name' }, { name: 'Last Name' }, { name: 'Address' }];
+    cols = [{ name: 'NomAssure' }, { name: 'Demande' }, { name: 'dateDeCreation' }];
+    allcols = [{ name: 'NomAssure' }, { name: 'Demande' }, { name: 'dateDeCreation' }];
     data = [];
     filteredData = [];
   
   
     @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+    listDemandes : any ; 
+    basicForm: FormGroup;
   
-    constructor() { }
+    addRowForm: FormGroup;
+    constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService , private demandeService :DemandeService) {
+
+
+      this.basicForm = this.fb.group({
+        id : new FormControl(),
+        dateDeCreation: new FormControl(),
+        nomAssure: new FormControl(),
+       
+
+      });
+
+
+     }
   
     ngOnInit() {
   
+
+      this.getDemandesList() ; 
+
+
       this.fetch((data) => {
         this.data = data;
         // copy over dataset to empty object
         this.filteredData = data;
       });
+    }
+    getDemandesList(){
+      this.demandeService.getDemandesList().subscribe(
+        data =>{
+          this.listDemandes = data; 
+          console.log("LIST DEMANDES" , data) ; 
+        }
+      )
     }
   
     fetch(cb) {

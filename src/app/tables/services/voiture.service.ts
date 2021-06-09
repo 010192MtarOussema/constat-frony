@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class VoitureService {
-    private url='http://localhost:9070/'
+    private url='http://localhost:9060/'
    
   constructor(private http: HttpClient) { }
 createVoiture(voiture: Object): Observable<Object> {

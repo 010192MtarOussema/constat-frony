@@ -55,14 +55,15 @@
                                 [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
                                     [rowHeight]="'60'" [limit]="10">
                                  
-                                    <ngx-datatable-column name="Nom" [width]="170" ></ngx-datatable-column>
+                                  <!--- <ngx-datatable-column name="Nom" [width]="170" ></ngx-datatable-column>
                                     <ngx-datatable-column name="Prenom" [width]="180"></ngx-datatable-column>
                                     <ngx-datatable-column name="Date De Naissance" [width]="200"></ngx-datatable-column>
                                     <ngx-datatable-column name="adresse" [width]="150"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Telephone" [width]="190"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Numero Cin" [width]="170"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Profession" [width]="240"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Telephone" [width]="190"></ngx-datatable-column>--> 
                                     <ngx-datatable-column name="Nom Utilisateur" [width]="200"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Numero Cin" [width]="200"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Profession" [width]="200"></ngx-datatable-column>
+                                    
 
 
                                     <!-- <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
@@ -78,6 +79,14 @@
                                                 <button class="btn tblActnBtn h-auto" (click)='deleteRow(row)'>
                                                     <i class="material-icons">delete</i>
                                                 </button>
+                                                <button class="btn tblActnBtn h-auto" data-toggle="modal"
+                                                data-target="#detailModal" (click)='detailRow(row)'>
+                                                <i class="material-icons">description</i>
+                                            </button>
+
+                                               <!-- <button class="btn tblActnBtn h-auto" (click)='detailRow(row)'>
+                                                    <i class="material-icons">description</i>
+                                                </button>-->
                                             </span>
                                         </ng-template>
                                     </ngx-datatable-column>
@@ -151,13 +160,16 @@
                                                             <i class="material-icons prefix">face</i>
                                                             <div
                                                                 class="p-l-40 input-field materialize-select col s12 ngx-table-form-select">
-                                                                <select formControlName="profession">
-                                                                    <option value="" disabled selected>Select Proffession
-                                                                    </option>
-                                                                    <option value="Expert">Expert</option>
-                                                                    <option value="Préstataire">Préstataire</option>
-                                                                    <option value="Assuré">Assuré</option>
+                                                                <div class="form-group default-select">
+                                                                <select class="form-control select2" data-placeholder="Select">
+                                                                    
+                                                                    <option>Prestataire</option>
+                                                                    <option>Expert</option>
+                                                                    <option>Assuré</option>
                                                                 </select>
+
+</div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -186,6 +198,75 @@
                                                                 placeholder="Adresse">
                                                         </div>
                                                     </div>
+
+
+                                                       
+                                                    <div class="modal-header">
+                                                        <div class="editRowModal">
+                                                            <div class="modal-header clearfix">
+                                                                <!-- <img [src]='newUserImg' alt="avatar"> -->
+                                                                <div class="modal-about">
+                                                                    <div class="font-weight-bold p-t-10 font-17">
+                                                                         Information sur la voiture</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">directions_car</i>
+                                                            <input formControlName="marque" class="form-control"
+                                                                placeholder="Marque ">
+                                                        </div>
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">directions_car</i>
+                                                            <input formControlName="couleur" class="form-control"
+                                                                placeholder="Couleur">
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    <div class="row">
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">credit_card</i>
+                                                            <input formControlName="numeroPermis" class="form-control"
+                                                                placeholder="Numéro de permis ">
+                                                        </div>
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">credit_card</i>
+                                                            <input formControlName="numeroImmatriculation" class="form-control"
+                                                                placeholder="Numéro d'immatriculation">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="modal-header">
+                                                        <div class="editRowModal">
+                                                            <div class="modal-header clearfix">
+                                                                <!-- <img [src]='newUserImg' alt="avatar"> -->
+                                                                <div class="modal-about">
+                                                                    <div class="font-weight-bold p-t-10 font-17">
+                                                                         Information sur la société d'assurance</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">account_balance</i>
+                                                            <input formControlName="nomAssurance" class="form-control"
+                                                                placeholder="Nom d'assurance ">
+                                                        </div>
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">store_mall_directory</i>
+                                                            <input formControlName="adresse" class="form-control"
+                                                                placeholder="Adresse">
+                                                        </div>
+                                                    </div>
+
+
+
+
 
                                                     <div class="modal-footer">
                                                         <div class="button-demo">
@@ -304,6 +385,47 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- Detail Record Modal Window -->
+
+
+                                <div class="modal fade" id="detailModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="detailRowModal">
+                                                <div class="modal-header clearfix">
+                                                    <div class="modal-about">
+                                                        <div class="font-weight-bold p-t-10 font-17">
+                                                             Voir tous les details</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn p-t-10 modal-close-button"
+                                                data-dismiss="modal" aria-label="Close">
+                                                <i class="material-icons">clear</i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          
+
+                                              
+                                                 
+                                  <!--- <ngx-datatable-column name="Nom" [width]="170" ></ngx-datatable-column>
+                                    <ngx-datatable-column name="Prenom" [width]="180"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Date De Naissance" [width]="200"></ngx-datatable-column>
+                                    <ngx-datatable-column name="adresse" [width]="150"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Telephone" [width]="190"></ngx-datatable-column>--> 
+                                    <ngx-datatable-column name="Nom Utilisateur" [width]="200"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Numero Cin" [width]="200"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Profession" [width]="200"></ngx-datatable-column>
+                                                   
+                                                   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
