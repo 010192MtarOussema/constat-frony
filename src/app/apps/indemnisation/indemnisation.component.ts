@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader.service';
+import { DemandeService } from 'src/app/tables/services/demande.service';
+import { UtilisateurService } from 'src/app/tables/services/utilisateur.service';
 
 
 @Component({
@@ -9,23 +13,32 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 })
 export class indemnisationComponent {
 
-    cols = [{ name: 'Date' },{ name: 'NomUtilisateur' }, { name: 'Demande' },{ name: 'Rapport' }, { name: 'indemnisation' }];
+    cols = [{ name: 'NomAssure' }, { name: 'Demande' },{ name: 'Rapport' }, { name: 'dateDeCreation' },{ name: 'Détails' }];
+    allcols = [{ name: 'NomAssure' }, { name: 'Demande' },{ name: 'Rapport' }, { name: 'dateDeCreation' }];
     data = [];
     filteredData = [];
   
   
     @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+    listDemandes : any ; 
+    basicForm: FormGroup;
   
-    constructor() { }
-  
-    ngOnInit() {
-  
-      this.fetch((data) => {
-        this.data = data;
-        // copy over dataset to empty object
-        this.filteredData = data;
+    addRowForm: FormGroup;
+    constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService , private demandeService :DemandeService) {
+
+
+      this.basicForm = this.fb.group({
+        id : new FormControl(),
+        dateDeCreation: new FormControl(),
+        nomAssure: new FormControl(),
+       
+
       });
-    }
+
+
+     }
+  
+ 
   
     fetch(cb) {
       const req = new XMLHttpRequest();

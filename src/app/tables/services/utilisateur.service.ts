@@ -7,8 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilisateurService {
-    private url='http://localhost:9060/'
-   
+    // private url='http://localhost:9060/' 
+    private url='http://192.168.1.101:9070/'
+
   constructor(private http: HttpClient) { }
 
   createUtilisateur(assure: Object): Observable<Object> {

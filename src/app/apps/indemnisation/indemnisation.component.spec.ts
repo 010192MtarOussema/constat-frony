@@ -3,7 +3,10 @@ import { indemnisationComponent } from './indemnisation.component';
 
 
 
-describe('reclamationComponent', () => {
+
+
+
+describe('indemnisationComponent', () => {
   let component: indemnisationComponent;
   let fixture: ComponentFixture<indemnisationComponent>;
 

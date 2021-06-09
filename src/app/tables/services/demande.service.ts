@@ -7,8 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DemandeService {
+  getindemnisationsList() {
+    throw new Error('Method not implemented.');
+  }
     private url='http://localhost:9060/'
-   
+    //private url='http://192.168.1.101:9060/'
   constructor(private http: HttpClient) { }
 
 createDemande(demande: Object): Observable<Object> {

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { reclamationComponent } from './reclamation.component';
+
+
+
+
 
 describe('reclamationComponent', () => {
   let component: reclamationComponent;
