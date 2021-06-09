@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader.service';
+import { ReclamationService } from 'src/app/tables/services/reclamation.service';
 
 
 @Component({
@@ -9,16 +12,34 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 })
 export class reclamationComponent {
 
-    cols = [{ name: 'Date' }, { name: 'NomUtilisateur' }, { name: 'Réclamation' }];
+    cols = [{ name: 'nomAssure' }, { name: 'Objet' }, { name: 'dateDeCreationDeReclamation' }];
+    allcols = [{ name: 'nomAssure' }, { name: 'Objet' }, { name: 'Date de creation de reclamation' }];
     data = [];
     filteredData = [];
   
   
     @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+
+    listReclamations : any ; 
+    basicForm: FormGroup;
   
-    constructor() { }
+    addRowForm: FormGroup;
+  
+    constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder ,private reclamationService :ReclamationService) { 
+
+      this.basicForm = this.fb.group({
+        id : new FormControl(),
+        Objet: new FormControl(),
+        nomAssure: new FormControl(),
+        dateDeCreationDeReclamation: new FormControl(),
+       
+
+      });
+    }
   
     ngOnInit() {
+
+      this.getReclamationsList() ; 
   
       this.fetch((data) => {
         this.data = data;
@@ -26,7 +47,15 @@ export class reclamationComponent {
         this.filteredData = data;
       });
     }
-  
+    detailRow(){}
+    getReclamationsList(){
+      this.reclamationService.getReclamationsList().subscribe(
+        data =>{
+          this.listReclamations = data; 
+          console.log("LIST ReclamationS" , data) ; 
+        }
+      )
+    }
     fetch(cb) {
       const req = new XMLHttpRequest();
       req.open('GET', 'assets/data/ngx-data.json');

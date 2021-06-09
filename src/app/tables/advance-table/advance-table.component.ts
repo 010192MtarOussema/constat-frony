@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 import { DynamicScriptLoaderService } from './../../services/dynamic-script-loader.service';
 import { Utilisateur, UtilisateurService } from '../services/utilisateur.service';
+import { VoitureService } from '../services/voiture.service';
+import { AssuranceService } from '../services/assurance.service';
 
 declare const $: any;
 declare const M: any;
@@ -25,6 +27,8 @@ export class AdvanceTableComponent implements OnInit {
   selectedRowData: selectRowInterface;
   newUserImg = "assets/images/user/user1.jpg";
    listUstilisateurs : any ; 
+   listAssurances : any ;
+   listVoitures : any ;
    user   : any ; 
 
 
@@ -42,7 +46,7 @@ export class AdvanceTableComponent implements OnInit {
 
   addRowForm: FormGroup;
 
-  constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService) {
+  constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService ,private voitureService : VoitureService , private assuranceService :AssuranceService ) {
 
     this.basicForm = this.fb.group({
       id : new FormControl(),
@@ -54,7 +58,14 @@ export class AdvanceTableComponent implements OnInit {
       profession: new FormControl(),
       motDePasse: new FormControl() , 
       nomUtilisateur: new FormControl() ,
-      adresse : new FormControl() 
+      adresse : new FormControl(),
+      marque:  new FormControl(),
+      numeroImmatriculation:  new FormControl(),
+      numeroPermis:  new FormControl(),
+      nomAssurance:  new FormControl(),
+      adresseAssurance:  new FormControl(),
+      couleur:  new FormControl(),
+      numContratAssurance:  new FormControl()
     });
 
     this.addRowForm = this.fb.group({
@@ -66,12 +77,21 @@ export class AdvanceTableComponent implements OnInit {
       profession: new FormControl(),
       motDePasse: new FormControl() , 
       nomUtilisateur: new FormControl() ,
-      adresse : new FormControl() 
+      adresse : new FormControl() ,
+      marque:  new FormControl(),
+      numeroImmatriculation:  new FormControl(),
+      numeroPermis:  new FormControl(),
+      nomAssurance:  new FormControl(),
+      adresseAssurance:  new FormControl(),
+      couleur:  new FormControl(),
+      numContratAssurance: new FormControl()
     });
   }
 
   ngOnInit() {
     this.getAllAssure() ; 
+    this.getAllVoiture() ; 
+    this.getAllAssurance() ; 
     // $('select').formSelect();
     // this.fetch((data) => {
     //   this.data = data;
@@ -79,7 +99,35 @@ export class AdvanceTableComponent implements OnInit {
     //   this.filteredData = data;
     // });
   }
-  detailRow(){}
+  detailRow(row){{
+    this.basicForm.patchValue({
+      id : row.id , 
+      nom: row.nom,
+      prenom: row.prenom,
+      dateDeNaissance: row.dateDeNaissance,
+      telephone: row.telephone,
+      numeroCin: row.numeroCin,
+      profession: row.selectionProfession,
+      motDePasse: row.motDePasse,
+      nomUtilisateur: row.nomUtilisateur,
+      adresse: row.adresse,
+      marque: row.marque,
+      numeroImmatriculation: row.numeroImmatriculation,
+      numeroPermis: row. numeroPermis,
+      nomAssurance: row. nomAssurance,
+      adresseAssurance: row. adresseAssurance,
+      couleur: row.couleur ,
+      numContratAssurance: row.numContratAssurance
+
+
+
+     
+
+    });
+    this.selectedRowData = row;
+
+    M.updateTextFields();
+  }}
   editRow(row) {
     this.basicForm.patchValue({
       id : row.id , 
@@ -92,6 +140,13 @@ export class AdvanceTableComponent implements OnInit {
       motDePasse: row.motDePasse,
       nomUtilisateur: row.nomUtilisateur,
       adresse: row.adresse,
+      marque: row.marque,
+      numeroImmatriculation: row.numeroImmatriculation,
+      numeroPermis: row. numeroPermis,
+      nomAssurance: row. nomAssurance,
+      adresseAssurance: row. adresseAssurance,
+      couleur: row.couleur ,
+      numContratAssurance: row.numContratAssurance
 
     });
     this.selectedRowData = row;
@@ -166,7 +221,9 @@ export class AdvanceTableComponent implements OnInit {
     this.utilisateurService.createUtilisateur(form.value).subscribe(
       data =>{
         console.log(data)
-        this.getAllAssure();
+        this.getAllAssure(); 
+        this.getAllVoiture();
+        this.getAllAssurance();
       }
       // console.log("upda
     )
@@ -175,6 +232,9 @@ export class AdvanceTableComponent implements OnInit {
     $('#addModal').modal('hide');
     this.showNotification("bg-green", "Utilisateur ajouté avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
+
+
+  
 
   // fetch(cb) {
   //   const req = new XMLHttpRequest();
@@ -193,6 +253,23 @@ export class AdvanceTableComponent implements OnInit {
       data =>{
         this.listUstilisateurs = data; 
         console.log("LIST ASSURES" , data) ; 
+      }
+    )
+  }
+  getAllVoiture(){
+    this.voitureService.getVoituresList().subscribe(
+      data =>{
+        this.listVoitures = data; 
+        console.log("LIST VOITURES" , data) ; 
+      }
+    )
+  }
+
+  getAllAssurance(){
+    this.assuranceService.getAssuranceList().subscribe(
+      data =>{
+        this.listVoitures = data; 
+        console.log("LIST ASSURANCES" , data) ; 
       }
     )
   }

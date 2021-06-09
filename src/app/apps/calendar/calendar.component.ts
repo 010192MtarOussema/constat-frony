@@ -13,8 +13,8 @@ import { UtilisateurService } from 'src/app/tables/services/utilisateur.service'
 })
 export class CalendarComponent {
 
-    cols = [{ name: 'NomAssure' }, { name: 'Demande' }, { name: 'dateDeCreation' }];
-    allcols = [{ name: 'NomAssure' }, { name: 'Demande' }, { name: 'dateDeCreation' }];
+    cols = [{ name: 'NomAssure' }, { name: 'Demande' }, { name: 'dateDeCreationDeDemande' }];
+    allcols = [{ name: 'NomAssure' }, { name: 'Demande' }, { name: 'Date de creation de demande' }];
     data = [];
     filteredData = [];
   
@@ -29,7 +29,7 @@ export class CalendarComponent {
 
       this.basicForm = this.fb.group({
         id : new FormControl(),
-        dateDeCreation: new FormControl(),
+        dateDeCreationDeDemande: new FormControl(),
         nomAssure: new FormControl(),
        
 
@@ -50,6 +50,7 @@ export class CalendarComponent {
         this.filteredData = data;
       });
     }
+    detailRow(){}
     getDemandesList(){
       this.demandeService.getDemandesList().subscribe(
         data =>{
