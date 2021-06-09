@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DemandeService {
-    private url='http://localhost:9070/'
+    private url='http://localhost:9060/'
    
   constructor(private http: HttpClient) { }
 
@@ -30,4 +30,11 @@ createDemande(demande: Object): Observable<Object> {
   updateDemande(id:number, value: any): Observable<Object> {
     return this.http.put(this.url+'demande/modifier/'+id ,value);
   }
+}
+
+export class Demande {
+  constructor(){}
+  id : any;
+  dateDeCreation:any;
+  nomUtilisateur:any
 }

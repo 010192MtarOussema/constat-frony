@@ -99,6 +99,13 @@ export class AdvanceTableComponent implements OnInit {
     M.updateTextFields();
   }
 
+
+
+
+  
+
+
+
   addRow() {
     this.addRowForm.patchValue({
       id: this.getId(10, 100),

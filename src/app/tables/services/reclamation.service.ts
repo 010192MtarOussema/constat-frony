@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReclamationService {
-    private url='http://localhost:9070/'
+    private url='http://localhost:9060/'
    
   constructor(private http: HttpClient) { }
 createReclamation(reclamation: Object): Observable<Object> {
