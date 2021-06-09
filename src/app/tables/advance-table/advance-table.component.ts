@@ -79,7 +79,7 @@ export class AdvanceTableComponent implements OnInit {
     //   this.filteredData = data;
     // });
   }
-
+  detailRow(){}
   editRow(row) {
     this.basicForm.patchValue({
       id : row.id , 
