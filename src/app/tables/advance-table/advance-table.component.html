@@ -62,7 +62,7 @@
                                     <ngx-datatable-column name="Telephone" [width]="190"></ngx-datatable-column>--> 
                                     <ngx-datatable-column name="Nom Utilisateur" [width]="200"></ngx-datatable-column>
                                     <ngx-datatable-column name="Numero Cin" [width]="200"></ngx-datatable-column>
-                                    <ngx-datatable-column name="Profession" [width]="200"></ngx-datatable-column>
+                                    <ngx-datatable-column name="profession" [width]="200"></ngx-datatable-column>
                                     
 
 
@@ -161,7 +161,8 @@
                                                             <div
                                                                 class="p-l-40 input-field materialize-select col s12 ngx-table-form-select">
                                                                 <div class="form-group default-select">
-                                                                <select class="form-control select2" data-placeholder="Select">
+                                                                    <label>proffesion</label>
+                                                                <select formControlName="profession" class="form-control select2" data-placeholder="Select">
                                                                     
                                                                     <option>Prestataire</option>
                                                                     <option>Expert</option>

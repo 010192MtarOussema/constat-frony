@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AssureService {
-    private url='http://localhost:9060/'
+    private url='http://localhost:9070/'
    
   constructor(private http: HttpClient) { }
 
@@ -32,7 +32,7 @@ createAssure(assure: Object): Observable<Object> {
   }
 }
 
-export class Demande {
+export class Assure {
   constructor(){}
   id : any;
   nom: any;

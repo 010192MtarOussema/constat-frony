@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RapportService {
-    private url='http://localhost:9070/'
+    private url='http://localhost:9060/'
    
   constructor(private http: HttpClient) { }
 
@@ -15,7 +15,9 @@ export class RapportService {
     return this.http.post(this.url+'rapport/enregistrer', rapport);
 
   }
-
+  getNombreRapport() {
+    return this.http.get(this.url+'rapport/rapport/totale');
+  }
   getRapportsList() {
     return this.http.get(this.url+'rapport/rapports');
   }

@@ -21,7 +21,8 @@ import { HttpClientModule } from "@angular/common/http";
     HeaderComponent,
     PageLoaderComponent,
     SidebarComponent,
-    RightSidebarComponent
+    RightSidebarComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,8 @@ import { HttpClientModule } from "@angular/common/http";
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

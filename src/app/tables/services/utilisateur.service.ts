@@ -7,14 +7,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilisateurService {
-    // private url='http://localhost:9060/' 
-    private url='http://192.168.1.101:9070/'
+    private url='http://localhost:9060/' 
+    
 
   constructor(private http: HttpClient) { }
 
   createUtilisateur(assure: Object): Observable<Object> {
     return this.http.post(this.url+'assure/enregistrer', assure);
 
+  }
+
+  getNombreUtilisateur() {
+    return this.http.get(this.url+'utilisateur/assure/totale');
   }
 
   getUtilisateursList() {
@@ -26,7 +30,7 @@ export class UtilisateurService {
   }
 
   deleteAssure(id: Number): Observable<any> {
-    return this.http.delete(this.url+'assure/assure/'+ id);
+    return this.http.delete(this.url+'assure/supprimer/'+ id);
   } 
   updateAssure(id:number, value: any): Observable<Object> {
     return this.http.put(this.url+'assure/assure/'+id ,value);

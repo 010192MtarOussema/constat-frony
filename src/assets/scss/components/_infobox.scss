@@ -458,8 +458,15 @@
   color: #212529;
   margin: 8px 0px 25px 0px;
   border-radius: 10px;
-  min-height: 140px;
+  min-height: 250px;
+  width: 250px;
+  text-align: center;
+  margin-top: 4rem;
 }
+.counter-box .text font-17 m-b-5 {
+  bottom: 15rem;
+}
+
 .info-box1 .text-right h2 {
   color: #44e229;
 }
