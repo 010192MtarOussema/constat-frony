@@ -18,6 +18,9 @@ createDemande(demande: Object): Observable<Object> {
     return this.http.post(this.url+'demande/enregistrer', demande);
 
   }
+  getNombreDemande() {
+    return this.http.get(this.url+'demande/demande/totale');
+  }
 
   getDemandesList() {
     return this.http.get(this.url+'demande/demandes');

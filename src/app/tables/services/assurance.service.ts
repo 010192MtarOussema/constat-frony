@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AssuranceService {
-    private url='http://localhost:9060/'
+    private url='http://localhost:9070/'
    
   constructor(private http: HttpClient) { }
 

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader.service';
+import { DemandeService } from 'src/app/tables/services/demande.service';
+import { ReclamationService } from 'src/app/tables/services/reclamation.service';
+import { UtilisateurService } from 'src/app/tables/services/utilisateur.service';
+import { RapportService } from 'src/app/tables/services/rapport.service';
 
 declare const $: any;
 declare const Chart: any;
@@ -11,10 +17,18 @@ declare const window: any;
 	styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+	nombreReclamation: any;
+	nombreRapport: any;
+	nombreDemande: any;
+	nombreUtilisateur: any;
 
-	constructor() { }
+	constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private reclamationService :ReclamationService , private rapportService :RapportService , private demandeService :DemandeService , private utilisateurService :UtilisateurService) { }
 
 	ngOnInit() {
+		this.getNombreReclamation() ;
+		this.getNombreRapport() ;
+		this.getNombreDemande() ;
+		this.getNombreUtilisateur() ;
 
 		$(function () {
 
@@ -25,8 +39,8 @@ export class MainComponent implements OnInit {
 			});
 			initCardChart();
 			initSparkline();
-			initChartReport1();
-			initChartReport2();
+			/*initChartReport1();
+			initChartReport2(); */
 		});
 
 		function initCardChart() {
@@ -103,7 +117,7 @@ export class MainComponent implements OnInit {
 			// We could use setInterval instead, but I prefer to do it this way
 			setTimeout(mdraw, mrefreshinterval);
 		}
-		function initChartReport1() {
+		/*function initChartReport1() {
 			var canvas = <HTMLCanvasElement>document.getElementById("chartReport1");
 			// Apply multiply blend when drawing datasets
 			var multiply = {
@@ -178,8 +192,9 @@ export class MainComponent implements OnInit {
 			};
 
 			window.chart = new Chart(canvas, config);
-		}
-		function initChartReport2() {
+		} */
+		
+		/* function initChartReport2() {
 			var canvas = <HTMLCanvasElement>document.getElementById("chartReport2");
 
 			var gradientBlue = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
@@ -258,7 +273,7 @@ export class MainComponent implements OnInit {
 				plugins: [shadowed]
 			});
 
-		}
+		} */
 		function initSparkline() {
 			$(".sparkline").each(function () {
 				var $this = $(this);
@@ -267,4 +282,38 @@ export class MainComponent implements OnInit {
 		}
 	}
 
+
+	getNombreReclamation(){
+		this.reclamationService.getNombreReclamation().subscribe(
+		  data =>{
+			this.nombreReclamation = data; 
+			console.log("Nombre Reclamation" , data) ; 
+		  }
+		)
+	  }
+
+	  getNombreRapport(){
+		this.rapportService.getNombreRapport().subscribe(
+		  data =>{
+			this.nombreRapport = data; 
+			console.log("Nombre Rapport" , data) ; 
+		  }
+		)
+	  }
+	  getNombreDemande(){
+		this.demandeService.getNombreDemande().subscribe(
+		  data =>{
+			this.nombreDemande = data; 
+			console.log("Nombre Demande" , data) ; 
+		  }
+		)
+	  }
+	  getNombreUtilisateur(){
+		this.utilisateurService.getNombreUtilisateur().subscribe(
+		  data =>{
+			this.nombreUtilisateur = data; 
+			console.log("Nombre Utilisateur" , data) ; 
+		  }
+		)
+	  }
 }

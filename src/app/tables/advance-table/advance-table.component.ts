@@ -6,10 +6,11 @@ import { DynamicScriptLoaderService } from './../../services/dynamic-script-load
 import { Utilisateur, UtilisateurService } from '../services/utilisateur.service';
 import { VoitureService } from '../services/voiture.service';
 import { AssuranceService } from '../services/assurance.service';
+import { Assure, AssureService } from '../services/assure.service';
 
 declare const $: any;
 declare const M: any;
-
+declare const swal: any;
 @Component({
   selector: 'app-advance-table',
   templateUrl: './advance-table.component.html',
@@ -34,10 +35,10 @@ export class AdvanceTableComponent implements OnInit {
 
   columns = [
     { name: 'nom' }, { name: 'Prenom' }, { name: 'Date De Naissance' }, { name: 'Adresse' }, { name: 'Télephone' }, { name: 'Numero Cin' }
-    , { name: 'Profession' } , { name: 'Nom Utilisateur' }  ];
+    , { name: 'profession' } , { name: 'Nom Utilisateur' }  ];
 
   allColumns = [  { name: 'nom' }, { name: 'Prenom' }, { name: 'Date De Naissance' }, { name: 'Adresse' }, { name: 'Télephone' }, { name: 'Numero Cin' }
-  , { name: 'Profession' } , { name: 'Nom Utilisateur' } ];
+  , { name: 'profession' } , { name: 'Nom Utilisateur' } ];
 
 
   data = [];
@@ -45,7 +46,8 @@ export class AdvanceTableComponent implements OnInit {
   basicForm: FormGroup;
 
   addRowForm: FormGroup;
-
+ utilisateur: Utilisateur;
+ assure: any;
   constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService ,private voitureService : VoitureService , private assuranceService :AssuranceService ) {
 
     this.basicForm = this.fb.group({
@@ -75,15 +77,15 @@ export class AdvanceTableComponent implements OnInit {
       telephone: new FormControl(),
       numeroCin: new FormControl(),
       profession: new FormControl(),
-      motDePasse: new FormControl() , 
+      motDePasse: new FormControl(), 
       nomUtilisateur: new FormControl() ,
       adresse : new FormControl() ,
-      marque:  new FormControl(),
-      numeroImmatriculation:  new FormControl(),
-      numeroPermis:  new FormControl(),
-      nomAssurance:  new FormControl(),
-      adresseAssurance:  new FormControl(),
-      couleur:  new FormControl(),
+      marque: new FormControl(),
+      numeroImmatriculation: new FormControl(),
+      numeroPermis: new FormControl(),
+      nomAssurance: new FormControl(),
+      adresseAssurance: new FormControl(),
+      couleur: new FormControl(),
       numContratAssurance: new FormControl()
     });
   }
@@ -98,6 +100,36 @@ export class AdvanceTableComponent implements OnInit {
     //   // copy over dataset to empty object
     //   this.filteredData = data;
     // });
+
+    'use strict';
+    $(function () {
+        $('.js-sweetalert button').on('click', function () {
+            var type = $(this).data('type');
+            if (type === 'confirm') {
+              showConfirmMessage();
+          }
+        
+        }
+        );
+      }
+    );
+    
+    
+    function showConfirmMessage() {
+      swal({
+          title: "Êtes-vous sûr?",
+          text: "Vous ne pourrez pas récupérer ce fichier imaginaire!",
+          type: "alert",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Oui, supprimez-le!",
+          closeOnConfirm: false
+      }, function () {
+          swal(
+            "Supprimé !", "Votre fichier imaginaire a été supprimé.", "succès");
+      });
+  }
+    
   }
   detailRow(row){{
     this.basicForm.patchValue({
@@ -107,7 +139,7 @@ export class AdvanceTableComponent implements OnInit {
       dateDeNaissance: row.dateDeNaissance,
       telephone: row.telephone,
       numeroCin: row.numeroCin,
-      profession: row.selectionProfession,
+      profession: row.profession,
       motDePasse: row.motDePasse,
       nomUtilisateur: row.nomUtilisateur,
       adresse: row.adresse,
@@ -136,7 +168,7 @@ export class AdvanceTableComponent implements OnInit {
       dateDeNaissance: row.dateDeNaissance,
       telephone: row.telephone,
       numeroCin: row.numeroCin,
-      profession: row.selectionProfession,
+      profession: row.profession,
       motDePasse: row.motDePasse,
       nomUtilisateur: row.nomUtilisateur,
       adresse: row.adresse,
@@ -178,7 +210,7 @@ export class AdvanceTableComponent implements OnInit {
       this.getAllAssure();
     })
     
-    this.showNotification("bg-red", "Utilisateur supprimé avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
+    this.showNotification("bg-red", "Utilisateur supprimé avec succés", "top", "center", "animated fadeInCenter", "animated fadeOutCenter")
   }
 
   arrayRemove(array, id) {
@@ -211,26 +243,31 @@ export class AdvanceTableComponent implements OnInit {
       )
       return true;
     });
-    this.showNotification("bg-black", "Modification avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
+    this.showNotification("bg-black", "Modification avec succés", "top", "center", "animated fadeInRight", "animated fadeOutRight")
   }
 
   onAddRowSave(form: FormGroup) {
     // this.data.push(form.value);
     // this.data = [...this.data];
     console.log(form.value)
+
     this.utilisateurService.createUtilisateur(form.value).subscribe(
       data =>{
         console.log(data)
+        this.assure=data;
+        console.log ('utilisateur enregistré' , this.assure.nom)
+        $('#addModal').modal('hide');
+        this.showNotification("bg-green", "L'utilisateur   "+this.assure.nom+"  ajouté avec succés"
+        , "top", "center", "animated fadeInRight", "animated fadeOutRight")
         this.getAllAssure(); 
         this.getAllVoiture();
         this.getAllAssurance();
+        
       }
       // console.log("upda
     )
     form.reset();
    
-    $('#addModal').modal('hide');
-    this.showNotification("bg-green", "Utilisateur ajouté avec succés", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
   }
 
 

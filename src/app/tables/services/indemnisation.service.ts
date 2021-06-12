@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class IndemnisationService {
-    private url='http://localhost:9070/'
+  private url='http://localhost:9060/'
   
   constructor(private http: HttpClient) { }
 
@@ -16,9 +16,10 @@ export class IndemnisationService {
 
   }
 
-  getIndemnisationsList() {
+  getIndemnisationList() {
     return this.http.get(this.url+'indemnisation/indemnisations');
   }
+
 
   getIndemnisation(id: number): Observable<any> {
     return this.http.get(this.url+'indemnisation/indemnisation/'+id);
@@ -35,5 +36,6 @@ export class IndemnisationService {
 export class Indemnisation {
   constructor(){}
   id : any;
- 
+  nomAssure : any;
+  decision : any;
 }

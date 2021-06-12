@@ -19,6 +19,10 @@ createReclamation(reclamation: Object): Observable<Object> {
     return this.http.get(this.url+'reclamation/reclamations');
   }
 
+  getNombreReclamation() {
+    return this.http.get(this.url+'reclamation/reclamation/totale');
+  }
+
   getReclamation(id: number): Observable<any> {
     return this.http.get(this.url+'reclamation/reclamation/'+id);
   }

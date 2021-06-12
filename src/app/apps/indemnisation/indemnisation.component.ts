@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader.service';
 import { DemandeService } from 'src/app/tables/services/demande.service';
+import { IndemnisationService } from 'src/app/tables/services/indemnisation.service';
+import { RapportService } from 'src/app/tables/services/rapport.service';
 import { UtilisateurService } from 'src/app/tables/services/utilisateur.service';
 
 
@@ -11,25 +13,27 @@ import { UtilisateurService } from 'src/app/tables/services/utilisateur.service'
     templateUrl: './indemnisation.component.html',
     styleUrls: ['./indemnisation.component.scss']
 })
-export class indemnisationComponent {
+export class IndemnisationComponent {
 
-    cols = [{ name: 'NomAssure' }, { name: 'Demande' },{ name: 'Rapport' }, { name: 'dateDeCreation' },{ name: 'Détails' }];
-    allcols = [{ name: 'NomAssure' }, { name: 'Demande' },{ name: 'Rapport' }, { name: 'dateDeCreation' }];
+    cols = [{ name: 'nomAssure' }, { name: 'Demande' }, { name: 'Rapport' }];
+    allcols = [{ name: 'nomAssure' }, { name: 'Demande' }, { name: 'Rapport' }];
     data = [];
     filteredData = [];
   
   
     @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
-    listDemandes : any ; 
+    listDemandes : any ;
+    listIndemnisations : any ; 
+    listRapports : any ;
     basicForm: FormGroup;
   
     addRowForm: FormGroup;
-    constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService , private demandeService :DemandeService) {
+    constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService , private demandeService :DemandeService, private indemnisationService :IndemnisationService , private rapportService :RapportService) {
 
 
       this.basicForm = this.fb.group({
         id : new FormControl(),
-        dateDeCreation: new FormControl(),
+        dateDeCreationDeDemande: new FormControl(),
         nomAssure: new FormControl(),
        
 
@@ -38,7 +42,69 @@ export class indemnisationComponent {
 
      }
   
- 
+    ngOnInit() {
+  
+
+      this.getDemandesList() ; 
+      this.getRapportsList() ; 
+      this.getIndemnisationList() ; 
+
+
+      this.fetch((data) => {
+        this.data = data;
+        // copy over dataset to empty object
+        this.filteredData = data;
+      });
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    }
+    detailRow(){}
+    getDemandesList(){
+      this.demandeService.getDemandesList().subscribe(
+        data =>{
+          this.listDemandes = data; 
+          console.log("LIST DEMANDES" , data) ; 
+        }
+      )
+    }
+
+    getRapportsList(){
+      this.rapportService.getRapportsList().subscribe(
+        data =>{
+          this.listRapports = data; 
+          console.log("LIST RapportS" , data) ; 
+        }
+      )
+    }
+
+    getIndemnisationList(){
+      this.indemnisationService.getIndemnisationList().subscribe(
+        data =>{
+          this.listIndemnisations = data; 
+          console.log("LIST Indemnisations" , data) ; 
+        }
+      )
+    }
   
     fetch(cb) {
       const req = new XMLHttpRequest();
