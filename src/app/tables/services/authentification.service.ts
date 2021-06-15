@@ -7,20 +7,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthentificationService {
-    private url='http://localhost:9070/'
+    private url='http://localhost:9076/'
    
   constructor(private http: HttpClient) { }
 
  
 
     authentification(utilisateur: Utilisateur): Observable<Object> {
-        return this.http.post(this.url+'utilisateur/authentification', utilisateur);
+        return this.http.post(this.url+'uti/authentification', utilisateur);
 
   }
 }
   export class Utilisateur {
     constructor(){}
-    id : any;
-    motDepaasse:any;
+  
+    motDePasse:any;
     nomUtilisateur:any
   }

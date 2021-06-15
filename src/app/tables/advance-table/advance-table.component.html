@@ -38,9 +38,9 @@
                                         </li>
                                     </ul>
 
-                                    <ul class="header-buttons m-r-20">
+                                    <ul *ngIf="showProfession" class="header-buttons m-r-20">
                                         <li>
-                                            <div class="icon-button-demo">
+                                            <div class="icon-button-demo" >
                                                 <button type="button" data-toggle="modal" data-target="#addModal"
                                                     (click)='addRow()'
                                                     class="btn bg-blue btn-circle waves-effect waves-circle waves-float">
@@ -162,14 +162,14 @@
                                                                 class="p-l-40 input-field materialize-select col s12 ngx-table-form-select">
                                                                 <div class="form-group default-select">
                                                                     <label>proffesion</label>
-                                                                <select formControlName="profession" class="form-control select2" data-placeholder="Select">
+                                                                <select formControlName="profession" (click)="checkValue()" class="form-control select2" data-placeholder="Select">
                                                                     
-                                                                    <option>Prestataire</option>
-                                                                    <option>Expert</option>
-                                                                    <option>Assuré</option>
+                                                                    <option *ngFor="let profession of professions" [value]="profession.value">
+                                                                        {{profession.value}}
+                                                                      </option>
                                                                 </select>
 
-</div>
+                                                    </div>
                                                                 
                                                             </div>
                                                         </div>
@@ -207,8 +207,8 @@
                                                     </div>
 
 
-                                                       
-                                                    <div class="modal-header">
+                                                     <div *ngIf="showInformationAssure">  
+                                                    <div class="modal-header" >
                                                         <div class="editRowModal">
                                                             <div class="modal-header clearfix">
                                                                 <!-- <img [src]='newUserImg' alt="avatar"> -->
@@ -273,7 +273,7 @@
 
 
 
-
+                                                     </div>
 
                                                     <div class="modal-footer">
                                                         <div class="button-demo">

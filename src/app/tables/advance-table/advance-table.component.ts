@@ -11,6 +11,9 @@ import { Assure, AssureService } from '../services/assure.service';
 declare const $: any;
 declare const M: any;
 declare const swal: any;
+interface Profession {
+  value: string;
+}
 @Component({
   selector: 'app-advance-table',
   templateUrl: './advance-table.component.html',
@@ -20,7 +23,11 @@ export class AdvanceTableComponent implements OnInit {
 
   @ViewChild('roleTemplate', { static: true }) roleTemplate: TemplateRef<any>;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
-
+  professions: Profession[] = [
+    {value: 'EXPERT'},
+    {value: 'PRESTATAIRE'},
+    {value: 'ASSURE'}
+  ];
   rows = [];
   selectedName: string = "";
   formData = [];
@@ -47,9 +54,25 @@ export class AdvanceTableComponent implements OnInit {
 
   addRowForm: FormGroup;
  utilisateur: Utilisateur;
+ dataFromLocalStorage : any ; 
  assure: any;
-  constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService ,private voitureService : VoitureService , private assuranceService :AssuranceService ) {
+ showInformationAssure : boolean = false; 
+ showProfession : boolean = false; 
 
+  constructor(private dynamicScriptLoader: DynamicScriptLoaderService, private fb: FormBuilder , private utilisateurService :UtilisateurService ,private voitureService : VoitureService , private assuranceService :AssuranceService ) {
+    
+    // get utilisateur connecté
+    this.dataFromLocalStorage = JSON.parse(localStorage.getItem('UTILISATEUR'));
+    console.log('data from ' , this.dataFromLocalStorage.profession)
+   // test boutton ajout
+  if(this.dataFromLocalStorage.profession=="ASSURE"){
+
+    this.showProfession = false ;
+    console.log('yes',   this.showProfession)
+  }else{
+    this.showProfession = true ; 
+    console.log('no' ,    this.showProfession)
+  }
     this.basicForm = this.fb.group({
       id : new FormControl(),
       nom: new FormControl(),
@@ -113,7 +136,7 @@ export class AdvanceTableComponent implements OnInit {
         );
       }
     );
-    
+
     
     function showConfirmMessage() {
       swal({
@@ -129,8 +152,19 @@ export class AdvanceTableComponent implements OnInit {
             "Supprimé !", "Votre fichier imaginaire a été supprimé.", "succès");
       });
   }
-    
+
   }
+  //check Profession 
+  checkValue(){
+    if(this.addRowForm.value.profession =="ASSURE"){
+
+      this.showInformationAssure = true ;
+      console.log('yes',   this.showInformationAssure)
+    }else{
+      this.showInformationAssure = false ; 
+      console.log('no' ,    this.showInformationAssure)
+    }
+  } 
   detailRow(row){{
     this.basicForm.patchValue({
       id : row.id , 
