@@ -51,14 +51,14 @@
                                             -->
 
                                                 <button class="btn tblActnBtn h-auto" data-toggle="modal"
-                                                    data-target="#detailModal" (click)='detailRow(row)'>
+                                                    data-target="#detailModal" type="submit" (click)="accepterIndemnisation()">
                                                     <i class="fas fa-check col-green"></i>
                                                 </button>
                                             
                                                 <span>
 
                                                     <button class="btn tblActnBtn h-auto" data-toggle="modal"
-                                                        data-target="#detailModal" (click)='detailRow(row)'>
+                                                        data-target="#detailModal" type="submit" (click)="refusIndemnisation()">
                                                        
                                                         <i class="fas fa-times col-red"></i>
                                                     </button>
@@ -86,31 +86,7 @@
                             <div class="card">
                                 <div class="body">
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="modal fade" id="detailModal" tabindex="-1" role="dialog"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <div class="detailRowModal">
-                                                                <div class="modal-header clearfix">
-                                                                    <div class="modal-about">
-                                                                        <div class="font-weight-bold p-t-10 font-17">
-                                                                            Voir tous les details de demande Constat</div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                            <button type="button" class="btn p-t-10 modal-close-button"
-                                                                data-dismiss="modal" aria-label="Close">
-                                                                <i class="material-icons">clear</i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
+                      
                                     </div>
                                 </div>
                             </div>

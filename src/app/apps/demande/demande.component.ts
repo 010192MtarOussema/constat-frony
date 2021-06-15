@@ -75,8 +75,13 @@ export class DemandeComponent {
       )
     }
     confirmerDemande(){
-      this.showNotification("bg-green", "L'utilisateur     ajouté avec succés"
-      , "top", "center", "animated fadeInRight", "animated fadeOutRight")
+      this.showNotification("bg-green", "La demande confirmé avec succés"
+      , "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
+    }
+
+    refuserDemande(){
+      this.showNotification("bg-red", "La demande refusé"
+      , "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
     }
     fetch(cb) {
       const req = new XMLHttpRequest();
