@@ -14,39 +14,42 @@ declare const $: any;
 })
 export class SigninComponent implements OnInit {
     authForm: FormGroup;
-    utilisateur : Utilisateur ;
+    utilisateur: Utilisateur;
 
-    constructor(private router: Router, private r: ActivatedRoute , private fb: FormBuilder 
-        ,private authentification : AuthentificationService) { 
+    constructor(private router: Router, private r: ActivatedRoute, private fb: FormBuilder
+        , private authentification: AuthentificationService) {
         this.authForm = this.fb.group({
 
-            motDepaasse: new FormControl() , 
-            nomUtilisateur: new FormControl() ,
+            motDePasse: new FormControl(),
+            nomUtilisateur: new FormControl(),
 
-     
-          });
+
+        });
     }
 
     onSubmit(form: FormGroup) {
-// console.log(form.value)
+        // console.log(form.value)
         this.authentification.authentification(form.value).subscribe(
-            data=>{
-                this.utilisateur = data ; 
+            data => {
+                console.log(form.value)
+                this.utilisateur = data;
                 console.log(this.utilisateur)
-                
-                if(data>0){
-                this.router.navigate(['/dashboard/main']);
-                 console.log("SUCESS")
-                  
-                }
-                else{
-                    this.showNotification("bg-red", "Nom utilisateur ou mot de passe incorrecte", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
 
-                    console.log("FAILED" ) ;
+
+                if ((this.utilisateur.motDePasse === form.value.motDePasse) && (this.utilisateur.nomUtilisateur === form.value.nomUtilisateur)) {
+                    localStorage.setItem("UTILISATEUR", JSON.stringify(this.utilisateur));
+                    this.router.navigate(['/dashboard/main']);
+                    console.log("SUCESS")
+
                 }
-    
+                else {
+                    this.showNotification("bg-red", "Nom utilisateur ou mot de passe sont incorrecte", "bottom", "right", "animated fadeInRight", "animated fadeOutRight")
+
+                    console.log("FAILED");
+                }
+
             }
-        ) ;
+        );
 
     }
 
@@ -145,33 +148,33 @@ export class SigninComponent implements OnInit {
         if (animateEnter === null || animateEnter === '') { animateEnter = 'animated fadeInDown'; }
         if (animateExit === null || animateExit === '') { animateExit = 'animated fadeOutUp'; }
         var allowDismiss = true;
-    
+
         $.notify({
-          message: text
+            message: text
         },
-          {
-            type: colorName,
-            allow_dismiss: allowDismiss,
-            newest_on_top: true,
-            timer: 1000,
-            placement: {
-              from: placementFrom,
-              align: placementAlign
-            },
-            animate: {
-              enter: animateEnter,
-              exit: animateExit
-            },
-            template: '<div data-notify="container" class="bootstrap-notify-container alert alert-dismissible {0} ' + (allowDismiss ? "p-r-35" : "") + '" role="alert">' +
-              '<span data-notify="icon"></span> ' +
-              '<span data-notify="title">{1}</span> ' +
-              '<span data-notify="message">{2}</span>' +
-              '<div class="progress" data-notify="progressbar">' +
-              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-              '</div>' +
-              '<a href="{3}" target="{4}" data-notify="url"></a>' +
-              '</div>'
-          });
-      }
-    
+            {
+                type: colorName,
+                allow_dismiss: allowDismiss,
+                newest_on_top: true,
+                timer: 1000,
+                placement: {
+                    from: placementFrom,
+                    align: placementAlign
+                },
+                animate: {
+                    enter: animateEnter,
+                    exit: animateExit
+                },
+                template: '<div data-notify="container" class="bootstrap-notify-container alert alert-dismissible {0} ' + (allowDismiss ? "p-r-35" : "") + '" role="alert">' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                    '</div>'
+            });
+    }
+
 }
